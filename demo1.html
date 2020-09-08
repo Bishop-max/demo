@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				let App = new Vue({
+					el:"#app",
+					data:{
+						message:"hello vuejs",
+						object: {
+						      title: 'How to do lists in Vue',
+						      author: 'Jane Doe',
+						      publishedAt: '2016-04-10'
+						},
+						listStyle:{
+							listStyle:"none",
+							listStylePosition:"inside"
+						}
+					}
+				})
+			}
+		</script>
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div>{{message}}</div>
+			<ul id="v-for-object" class="demo" >
+			  <li v-for="i in object" :style="[listStyle]">
+			    {{ i }}
+			  </li>
+			</ul>
+		</div>
+	</body>
+</html>

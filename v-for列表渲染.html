@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				let App = new Vue({
+					el:"#app",
+					mounted(){
+						window.vue = this
+					},
+					data:{
+						message:"hello vuejs",
+						items:["333","111","222"],
+						testObject:{
+							a:1
+						}
+					}
+				})
+			}
+		</script>
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div v-for="i in testObject">{{i}}</div>
+			<div v-for="i in items">{{i}}</div>
+			<div>{{message}}</div>
+		</div>
+	</body>
+</html>

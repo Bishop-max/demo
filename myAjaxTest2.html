@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bannerTest2.css"/>
+		<script src="js/ajaxPakage.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				const imgList = [];
+				let div = document.getElementById("div")
+				let fatherdiv = document.getElementById("father-div")
+				let pre = document.getElementById("pre")
+				let next = document.getElementById("next")
+				var move = 0;
+				div.style.display = "flex";
+				div.style.position = "absolute"
+				divBtn.style.cssText = "display: flex;position: absolute;left: 50%;bottom: 10px;margin-left: -50px;"
+				myAjax({
+					url:"/home/multidata",
+					type:"get",
+					success:(x) =>{
+						imgList.push(...x.data.banner.list);
+						let timer = null;
+						var img = document.createElement("img");
+						img.src = imgList[0].image;
+						img.style.flex = "1";
+						div.appendChild(img);
+						
+						for(let i=0;i<imgList.length;i++){
+							var li = document.createElement("div")
+							li.setAttribute("class","childBtn")
+							li.setAttribute("id",i)
+							li.style.cssText = "height: 10px;width: 10px;background-color: #F0F8FF;border-radius: 5px;flex: 1;margin-left: 10px;cursor: pointer;";
+							divBtn.appendChild(li)
+							divBtn.children[0].style.backgroundColor = "red"
+							li.onclick = function(e) {
+								let i = e.target.id
+								img.src = imgList[i].image;
+								for(let r=0;r<imgList.length;r++){
+									divBtn.children[r].style.backgroundColor = "white"
+								}
+								divBtn.children[i].style.backgroundColor = "red"	
+								autoPlay(i)
+							}
+							
+						}
+						
+						// let move = 0;
+						function autoPlay(i){
+							let move = i ? i:0;
+							console.log(i)
+							clearInterval(timer);
+							timer = setInterval(()=>{
+								if(move == imgList.length){
+									move = 0;
+								}
+								img.src = imgList[move].image;
+								for(let r=0;r<imgList.length;r++){
+									divBtn.children[r].style.backgroundColor = "white";
+								}
+								divBtn.children[move].style.backgroundColor = "red";
+								move++;
+							},2000)
+						}
+						autoPlay();
+			},
+					err:(x)=>{
+						console.log(x)
+					}
+				})
+				console.log(imgList)
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="father-div">
+			<div id="div"></div>
+			<div id="divBtn"></div>
+		</div>
+	</body>
+</html>

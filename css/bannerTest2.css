@@ -1,0 +1,10 @@
+#father-div{
+	width: 750px;
+	height: 390px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	overflow: hidden;
+}
+

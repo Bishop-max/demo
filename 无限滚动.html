@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				width: 1226px;
+				height: 230px;
+				border: 1px solid black;
+				margin: 100px auto;
+				overflow: hidden;
+			}
+			div>ul{
+				height: 230px;
+				width: 3678px;
+				list-style: none;
+				background: #000;
+			}
+			div>ul>li{
+				width: 613px;
+				height: 230px;
+				float: left;
+			}
+			div>ul>li>img{
+				width: 613px;
+				height: 230px;
+			}
+		</style>
+		<script src="JQuery/jquery-3.4.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				//定义变量保存偏移位
+				var offset = 0;
+				//让图片滚动起来,周期函数
+				var timer;
+				function autoPlay(){
+					timer = setInterval(function(){
+						offset += -10;
+						if(offset <= -2452){
+							offset = 0;
+						}
+						$("ul").css("marginLeft",offset);
+					},50);
+				}
+				autoPlay();
+				$("li").hover(function(){
+					//停止滚动
+					clearInterval(timer);
+					//给非当前选中添加蒙版
+					$(this).siblings().fadeTo(10,0.5);
+				},function(){
+					//继续滚动
+					autoPlay();
+					//恢复原来的状态
+					$("li").fadeTo(100,1);
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li><img src="img/lb1.jpg" ></li>
+				<li><img src="img/lb2.jpg" ></li>
+				<li><img src="img/lb3.jpg" ></li>
+				<li><img src="img/lb4.jpg" ></li>
+				<li><img src="img/lb1.jpg" ></li>
+				<li><img src="img/lb2.jpg" ></li>
+			</ul>
+		</div>
+	</body>
+</html>

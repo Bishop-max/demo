@@ -1,0 +1,25 @@
+#father-div{
+	width: 750px;
+	height: 390px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	overflow: hidden;
+}
+#pre{
+	position: absolute;
+	left: 0;
+	top: 48%;
+	color: aliceblue;
+	cursor: pointer;
+	z-index: 10;
+}
+#next{
+	position: absolute;
+	right: 0;
+	top: 48%;
+	color: aliceblue;
+	cursor: pointer;
+	z-index: 10;
+}

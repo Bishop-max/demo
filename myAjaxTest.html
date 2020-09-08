@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bannerTest.css"/>
+		<script src="js/ajaxPakage.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				const imgList = [];
+				let div = document.getElementById("div")
+				let fatherdiv = document.getElementById("father-div")
+				let pre = document.getElementById("pre")
+				let next = document.getElementById("next")
+				var move = 0;
+				div.style.display = "flex";
+				div.style.position = "absolute"
+				
+				myAjax({
+					url:"/home/multidata",
+					type:"get",
+					success:(x) =>{
+						imgList.push(...x.data.banner.list)
+						//为父容器添加图片
+						for(let i=0;i<imgList.length;i++){
+							var img = document.createElement("img");
+							img.src = imgList[i].image;
+							img.style.flex = "1";
+							div.appendChild(img);
+						}
+						//bug的解决方案
+						var img = document.createElement("img");
+						img.src = imgList[0].image;
+						img.style.flex = "1";
+						div.appendChild(img);
+
+						let imgWidth = div.children[0].offsetWidth;
+						console.log(imgList.length)
+						console.log(imgWidth*imgList.length)
+						div.style.width = imgWidth*imgList.length + "px";
+						//点击左按钮向左切换
+						pre.onclick=function(){
+							if(move == 0){
+								move = imgList.length;
+								div.style.left = -move*imgWidth + "px";
+							}
+							move--;
+							animate(div,-move*imgWidth)
+							// div.style.left = -move*imgWidth + "px";
+						}
+						//点击右按钮向右切换
+						next.onclick = function(){
+							if(move == imgList.length){
+								console.log("达到最长")
+								move = 0;
+								div.style.left = 0 + "px";
+							}
+							console.log("继续累加")
+							move++;
+							animate(div,-move*imgWidth)
+							// div.style.left = -move*imgWidth + "px";
+						}
+						//缓慢移动方法
+						function animate(element,distance){
+							clearInterval(element.timer)
+							element.timer=setInterval(function(){
+								 var present=element.offsetLeft;//获取元素的当前的位置
+								 var movement=10;//每次移动的距离
+								 movement=present<distance?movement:-movement;    
+								 present+=movement;//当前移动到位置
+								 if(Math.abs(present-distance)>Math.abs(movement)){
+										 element.style.left=present+"px"
+								 }else{
+										 clearInterval(element.timer);
+										 element.style.left=distance+"px"
+								 }
+							},10);
+						}
+						
+						//自动播放函数
+						let timer = null;
+						function autoPlay(){
+							timer = setInterval(()=>{
+								next.onclick()
+							},2500)
+						}
+						autoPlay();
+						
+						fatherdiv.onmouseenter = function(){
+							clearInterval(timer)
+						};
+						fatherdiv.onmouseleave = function(){
+							autoPlay()
+						}
+					},
+					err:(x)=>{
+						console.log(x)
+					}
+				})
+				console.log(imgList)
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="father-div">
+			<div id="pre"><</div>
+			<div id="next">></div>
+			<div id="div"></div>
+			<div id="divBtn"></div>
+		</div>
+	</body>
+</html>
