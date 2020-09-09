@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			 function mySetInterVal(fn, a, b) {
+			        mySetInterVal.timer = null
+			        mySetInterVal.myClear = function () {
+			          clearTimeout(mySetInterVal.timer)
+			        }
+			        let count = 0
+			
+			        ;(function cb() {
+			          mySetInterVal.timer = setTimeout(() => {
+			            fn(a, b, count)
+			            count++
+			            cb()
+			          }, a + count * b)
+			        })()
+			      }
+			
+			      function fn(a, b, count) {
+			        console.log(a, b, count, new Date().getTime())
+			      }
+			      mySetInterVal(fn, 100, 200)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
