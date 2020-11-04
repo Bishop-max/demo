@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				function loadImage(src,resolve,reject){
+					var img = new Image();
+					img.src = src;
+					img.onload = resolve(img);
+					img.onerror = reject;
+					
+				}
+				
+				loadImage(
+				"img/lb2.jpg",
+				(imge) => {
+					document.body.appendChild(imge);
+				},
+				() => {
+					console.log("加载完成");
+				}
+				);
+				console.log("木管")
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

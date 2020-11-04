@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				function interval(callback,delay){
+					let id = setInterval(() => callback(id),delay)
+				}
+				interval((id) =>{
+					console.log(id)
+				},1000)
+				console.log("main")
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
