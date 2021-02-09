@@ -1,0 +1,162 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.wrapper{
+				height: 200px;
+				background-color: #00FFFF;
+				overflow: hidden;
+			}
+		</style>
+		
+		<script src="./js/bscroll.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+		<script type="text/javascript">
+			window.onload = function(){
+				const bscroll = new BScroll(document.querySelector('.wrapper'),{
+					probeType:2,	//侦测类型
+					pullUpLoad:true //上拉加载
+				})
+				
+				
+				/**
+				 * 
+				 * 
+				 * 
+				 * 默认情况下不实时监听滚动位置
+				 * 
+				 * options：
+				 * 1.probeType侦测类型
+				 * 0，1第一是不实时侦测位置
+				 * 2：在手指滚动的过程中侦测，手指离开后的惯性滚动不侦测
+				 * 3：只要是滚动都侦测
+				 * 
+				 * 2.pullUpLoad 上拉加载
+				 */
+				
+				//1.'scroll'滚动事件
+					bscroll.on('scroll',(position) =>{
+						//console.log(position)
+					})
+				//2.'pullingUp'上拉加载事件
+					bscroll.on('pullingUp',() =>{
+						console.log("上拉加载更多")
+						
+						//调用该函数后才能再次调用上拉加载
+						bscroll.finishPullUp()
+					})
+			}
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<ul class="content">
+				<li>商品列表1</li>
+				<li>商品列表2</li>
+				<li>商品列表3</li>
+				<li>商品列表4</li>
+				<li>商品列表5</li>
+				<li>商品列表6</li>
+				<li>商品列表7</li>
+				<li>商品列表8</li>
+				<li>商品列表9</li>
+				<li>商品列表10</li>
+				<li>商品列表11</li>
+				<li>商品列表12</li>
+				<li>商品列表13</li>
+				<li>商品列表14</li>
+				<li>商品列表15</li>
+				<li>商品列表16</li>
+				<li>商品列表17</li>
+				<li>商品列表18</li>
+				<li>商品列表19</li>
+				<li>商品列表20</li>
+				<li>商品列表21</li>
+				<li>商品列表22</li>
+				<li>商品列表23</li>
+				<li>商品列表24</li>
+				<li>商品列表25</li>
+				<li>商品列表26</li>
+				<li>商品列表27</li>
+				<li>商品列表28</li>
+				<li>商品列表29</li>
+				<li>商品列表30</li>
+				<li>商品列表31</li>
+				<li>商品列表32</li>
+				<li>商品列表33</li>
+				<li>商品列表34</li>
+				<li>商品列表35</li>
+				<li>商品列表36</li>
+				<li>商品列表37</li>
+				<li>商品列表38</li>
+				<li>商品列表39</li>
+				<li>商品列表40</li>
+				<li>商品列表41</li>
+				<li>商品列表42</li>
+				<li>商品列表43</li>
+				<li>商品列表44</li>
+				<li>商品列表45</li>
+				<li>商品列表46</li>
+				<li>商品列表47</li>
+				<li>商品列表48</li>
+				<li>商品列表49</li>
+				<li>商品列表50</li>
+				<li>商品列表51</li>
+				<li>商品列表52</li>
+				<li>商品列表53</li>
+				<li>商品列表54</li>
+				<li>商品列表55</li>
+				<li>商品列表56</li>
+				<li>商品列表57</li>
+				<li>商品列表58</li>
+				<li>商品列表59</li>
+				<li>商品列表60</li>
+				<li>商品列表61</li>
+				<li>商品列表62</li>
+				<li>商品列表63</li>
+				<li>商品列表64</li>
+				<li>商品列表65</li>
+				<li>商品列表66</li>
+				<li>商品列表67</li>
+				<li>商品列表68</li>
+				<li>商品列表69</li>
+				<li>商品列表70</li>
+				<li>商品列表71</li>
+				<li>商品列表72</li>
+				<li>商品列表73</li>
+				<li>商品列表74</li>
+				<li>商品列表75</li>
+				<li>商品列表76</li>
+				<li>商品列表77</li>
+				<li>商品列表78</li>
+				<li>商品列表79</li>
+				<li>商品列表80</li>
+				<li>商品列表81</li>
+				<li>商品列表82</li>
+				<li>商品列表83</li>
+				<li>商品列表84</li>
+				<li>商品列表85</li>
+				<li>商品列表86</li>
+				<li>商品列表87</li>
+				<li>商品列表88</li>
+				<li>商品列表89</li>
+				<li>商品列表90</li>
+				<li>商品列表91</li>
+				<li>商品列表92</li>
+				<li>商品列表93</li>
+				<li>商品列表94</li>
+				<li>商品列表95</li>
+				<li>商品列表96</li>
+				<li>商品列表97</li>
+				<li>商品列表98</li>
+				<li>商品列表99</li>
+				<li>商品列表100</li>
+			</ul>
+		</div>
+	</body>
+</html>

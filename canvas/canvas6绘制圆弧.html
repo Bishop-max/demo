@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body::-webkit-scrollbar{
+				display: none;
+			}
+			canvas{
+				display: block;
+				margin: auto;
+				border:1px solid #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="500" height="500">
+			当前浏览器版本不支持，请升级浏览器
+		</canvas>
+		<script type="text/javascript">
+			/**
+			 * canvas的动画思想：清屏-绘制-渲染
+			 */
+			//得到canvas画布
+			var myCanvas = document.getElementById("myCanvas")
+			console.log(myCanvas);
+			//得到画布的上下文，上下文有两个，2d的上下文和3d的上下文
+			var mcs = myCanvas.getContext("2d");
+			console.log(mcs);
+			
+			mcs.beginPath();
+			//arc(x,y,r,bigin,end,顺时针/逆时针)
+			mcs.arc(200,200,100,0,1,false);
+			mcs.stroke()
+		</script>
+	</body>
+</html>

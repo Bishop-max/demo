@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = () =>{
+				function sum(arr){
+					return arr.reduce((pre,next) =>{
+						return pre+next
+					},0)
+				}
+				const result = sum([1,3,5,7,9])
+				console.log(result)
+				
+				function sumInPromise(arr){
+					const p = Promise.resolve(0);
+					return arr.reduce((pre,next) =>{
+						return pre.then(res =>{
+							console.log(res)
+							return res+next
+						})
+					},p)
+				}
+				sumInPromise([1,3,5,7,9]).then(res => {
+					console.log(res)
+				})
+				
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

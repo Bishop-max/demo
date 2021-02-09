@@ -14,9 +14,44 @@
 				console.log(arr)
 				arr.unshift("111")
 				console.log(arr)
+				
+				var a=1,b=2;
+				console.log(a,b);
+				
+				function node2Fragment(el){
+					var fragment = document.createDocumentFragment(),
+							child;
+					//将原生节点拷贝到fragment
+					while(child = el.firstChild){
+						console.log(child);
+						console.log(typeof child);
+						console.log(el.firstChild);
+						fragment.appendChild(child)
+						console.log(el.firstChild);
+					}
+					
+					return fragment;
+				}
+				var node = document.querySelector("#node")
+				console.log(node.firstChild);
+				console.log(node.childNodes);
+				node2Fragment(node);
 			}
 		</script>
 	</head>
 	<body>
+		<div id="node">
+			<div>
+				<div></div>
+				<p></p>
+				<h2></h2>
+			</div>
+			<p>
+				<a href=""></a>
+			</p>
+			<h2>
+				<span></span>
+			</h2>
+		</div>
 	</body>
 </html>

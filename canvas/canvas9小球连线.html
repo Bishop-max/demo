@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8"/>
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" ></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("myCanvas")
+			var mtx = canvas.getContext("2d");
+			canvas.width = document.documentElement.clientWidth;
+			canvas.height = document.documentElement.clientHeight;
+			
+			function Ball(){
+				this.x = parseInt(Math.random()*canvas.width) -10
+				this.y = parseInt(Math.random()*canvas.height) -10
+				this.r = 10;
+				//设置行进方向
+				this.dx = parseInt(Math.random()*10) -5;
+				this.dy = parseInt(Math.random()*10) -5;
+				
+				this.color = getRandomColor()
+				
+				ballArr.push(this)
+				
+				//记录自己在数组中的位置
+				this.index = ballArr.length - 1
+			}
+			Ball.prototype.update = function(){
+				this.x += this.dx;
+				this.y += this.dy;
+				if(this.x <= this.r || this.x >= canvas.width - this.r){
+					this.dx = -this.dx;
+				}
+				if(this.y <= this.r || this.y >= canvas.height -this.r){
+					this.dy = -this.dy;
+				}
+			}
+			
+			Ball.prototype.render = function(){
+				mtx.beginPath();
+				//透明度
+				mtx.globalAlpha = 1;
+				mtx.arc(this.x,this.y,this.r,0,2 * Math.PI,false)
+				mtx.fillStyle = this.color
+				mtx.fill()
+				
+				//画线的逻辑
+				//画线只画比自己大的一方就行了
+				for(let i = this.index; i < ballArr.length;i++){
+					if(Math.abs(ballArr[i].x - this.x) < 150 && Math.abs(ballArr[i].y - this.y) < 150){
+						mtx.strokeStyle = "#000";
+						mtx.beginPath();
+						//设置透明度
+						mtx.globalAlpha = 10 / Math.sqrt(Math.pow(ballArr[i].x - this.x,2) + Math.pow(ballArr[i].y - this.y,2))
+						mtx.moveTo(this.x,this.y);
+						mtx.lineTo(ballArr[i].x,ballArr[i].y);
+						mtx.closePath();
+						mtx.stroke();
+					}
+				}
+			}
+			
+			var ballArr = [];
+			
+			for(let i = 0;i< 100;i++){
+				new Ball()
+			}
+			setInterval(function(){
+				mtx.clearRect(0,0,canvas.width,canvas.height)
+				for(let i =0 ; i < ballArr.length; i++){
+					ballArr[i].update();
+					ballArr[i].render();
+				}
+			},10)
+			
+			function getRandomColor(){
+				var alltype = "0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f"
+				var alltypeArr = alltype.split(",");
+				var color = "#";
+				for(let i = 0 ;i < 6; i++){
+					var random = parseInt(Math.random()*alltypeArr.length)
+					color += alltypeArr[random]
+				}
+				return color
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				const app = new Vue({
+					el:"#app",
+					data:{
+						message:"未更新",
+					},
+					methods:{
+						msgChange(){
+							app.message = "已更新";
+							console.log(app.$el.textContent);
+							this.$nextTick(() =>{
+								console.log(app.$el.textContent);
+							})
+						}
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			{{message}}
+			<button type="button" @click="msgChange">改变消息</button>
+		</div>
+	</body>
+</html>

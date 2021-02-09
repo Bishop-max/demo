@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				height: 10000px;
+			}
+		</style>
+		<script type="text/javascript">
+			
+			window.onload = function(){
+				/**
+				 * fn[function]需要防抖动的函数
+				 * delay[number]毫秒，防抖期限值
+				 */
+				function debounce(fn,delay){
+					let timer = null;//借助闭包
+					return function(){
+						if(timer){
+							clearTimeout(timer);//进入该分支语句，说明当前正在一个计时过程中，并且又触发了相同事件
+							timer = setTimeout(fn,delay);
+						}
+						else{
+							timer = setTimeout(fn,delay);//进入该分支，说明没有在计时，那么开始一个计时
+						}
+					}
+				}
+				
+				function showTop(){
+					var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+					console.log('滚动位置'+sTop);
+				}
+				
+				window.onscroll = debounce(showTop,1000)
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<div >
+		</div>
+	</body>
+</html>

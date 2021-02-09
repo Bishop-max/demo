@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var bValue;
+				
+				var o = {};
+				
+				Object.defineProperty(o, "b", {
+				  get : function(){
+				    console.log('监听正在获取b')
+				    return bValue;
+				  },
+				  set : function(newValue){
+				    console.log('监听正在设置b')
+				    bValue = newValue;
+				  },
+				  enumerable : true,
+				  configurable : true
+				});
+				
+				o.b = 38;
+				console.log(o.b)
+				
+				o.b = 40
+				o.b
+				
+				/**
+				 * 简单实现vue双向绑定
+				 */
+				var sp = document.getElementById('sp'),
+						input = document.getElementById('input'),
+						obj = {}
+				
+				Object.defineProperty(obj,"msg",{
+					set:function(newValue){
+						input.value = newValue;
+						sp.innerText = newValue
+					}
+				})
+				
+				input.addEventListener('keyup',function(event){
+					obj.msg = event.target.value
+				})
+				
+				/**
+				 * 
+				 */
+				function Observer() {
+				  
+						this.dep = [];
+
+				  // register(fn) {
+				  //   this.dep.push(fn)
+				  // }
+				  
+				  // notify() {
+				  //   this.dep.forEach(item => item())
+				  // }
+				}
+				//
+				Observer.prototype.register = function(fn) {
+				    this.dep.push(fn)
+				  }
+				
+				Observer.prototype.notify = function(){
+						this.dep.forEach(item => item())
+				}
+				
+				const wantCake = new Observer();
+				// 每来一个顾客就注册一个想执行的函数
+				wantCake.register(() => {console.log("call daisy")})
+				wantCake.register(() => {console.log("call anny")})
+				wantCake.register(() => {console.log("call sunny")})
+				
+				console.log(Observer.prototype)
+				
+				// 最后蛋糕做好之后，通知所有的客户
+				wantCake.notify()
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="input" />
+		<span id="sp"></span>
+	</body>
+</html>

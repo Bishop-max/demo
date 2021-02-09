@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// class Subject{
+			// 	constructor() {
+			// 	    this.observers = []
+			// 			this.state = null
+			// 	}
+			// 	//状态更新
+			// 	setState(state){
+			// 		this.state = state
+			// 	}
+			// 	//获取状态
+			// 	getState(){
+			// 		return this.state
+			// 		//通知观察者
+			// 	}
+			// 	//注册观察者
+			// 	attach(obser){
+			// 		this.observers.push(obser)
+			// 	}
+			// 	//通知观察者
+			// 	notifyAllObservers(){
+			// 		for( item of this.observers ){
+			// 			item.update();
+			// 		}
+			// 	}
+			// }
+			
+			// class Observer {
+			// 	constructor(sub) {
+			// 	    this.sub = sub
+						
+			// 			this.sub.attach(this);
+			// 	}
+				
+			// 	update(){
+			// 		let result = this.sub.getState()
+			// 		console.log("订阅的数据发生变化：",result)
+			// 	}
+			// }
+			
+			
+			// const a = new Subject();
+			
+			// const ob1 = new Observer(a)
+			
+			// a.setState(11)
+			
+			// console.log(111)
+			let publisher = {
+			    registration: {},
+			    subscribe: function (type, fn) {
+			        if (Object.keys(this.registration).indexOf(type) >= 0) {
+			            this.registration[type].push(fn);
+			        } else {
+			            this.registration[type] = [];
+			            this.registration[type].push(fn);
+			        }
+			    },
+			    unSubscribe: function (type, fnName) {
+			        if (Object.keys(this.registration).indexOf(type) >= 0) {
+			            let index = -1;
+			            this.registration[type].forEach(function (func, idx) {
+			                if (func.name === fnName) {
+			                    index = idx;
+			                }
+			            })
+			            index > -1 ? this.registration[type].splice(index, 1) : null
+			        }
+			    },
+			    publish: function (type, message) {
+			        if (Object.keys(this.registration).indexOf(type) >= 0) {
+			            for (let fn of this.registration[type]) {
+			                fn(message)
+			            }
+			        }
+			    }
+			}
+			
+			let subscriberA = function (message) {
+			    console.log(`A收到通知：${message}`)
+			};
+			
+			let subscriberB = function (message) {
+			    console.log(`B收到通知：${message}`)
+			};
+			
+			let subscriberC = function (message) {
+			    console.log(`C收到通知：${message}`)
+			};
+			
+			publisher.subscribe('game', subscriberA);
+			publisher.subscribe('game', subscriberB);
+			publisher.subscribe('game', subscriberC);
+			
+			publisher.publish('game', '恭喜RNG获得LOL 2018季中赛冠军！')
+			publisher.publish('game', '恭喜IG获得LOL 2018季中赛冠军！')
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid #00FFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mycas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("mycas")
+			var ctx = canvas.getContext("2d");
+			//线型渐变
+			// var linear = ctx.createLinearGradient(10,210,210,210)
+			// linear.addColorStop(0,"red")
+			// linear.addColorStop(0.5,"blue")
+			// linear.addColorStop(1,"purple")
+			// ctx.fillStyle = linear
+			// ctx.fillRect(10,10,210,210)
+			//径向渐变
+			var linear = ctx.createRadialGradient(200,200,100,200,200,0)
+			linear.addColorStop(0,"black")
+			linear.addColorStop(0.5,"yellow")
+			linear.addColorStop(1,"red")
+			ctx.fillStyle = linear
+			ctx.fillRect(100,100,200,200)
+		</script>
+	</body>
+</html>

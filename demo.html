@@ -22,8 +22,124 @@
 			console.log(obj[a] instanceof Object)
 			console.log(b)
 			console.log(obj)
+			
+			
+			//模仿reducer拆分
+			const obj1 = {
+				num:0
+			}
+			
+			
+			function func1(o = obj1,action){
+				const a = {...obj1,num:action.num}
+				console.log(a)
+				return a
+			}
+			// func1()
+			
+			const obj2 ={
+				num:2
+			}
+			function func2(o = obj2,action){
+				const b = {...obj2,count:action.count}
+				console.log(b)
+				return b
+			}
+			//返回的对象中的函数都会被调用一次
+			function func3( x = {},action){
+				return {
+					f1:func1(x.info,action),
+					f2:func2(x.unifo,action)
+				}
+			}
+			func3({},{num:3,count:5})
+			
+			console.dir({toString:function(){return 1},valueOf:function(){ return []}} ==1)
+			
+			const obj5 = {
+				a:1,
+				toString:() =>{
+					return 1
+				},
+				valueOf:function(){
+					return []
+				},
+				x:printNum()
+			}
+			function printNum(){
+				console.log(1)
+			}
+			function print(){
+				return {
+				a:1,
+				toString:() =>{
+					return 1
+				},
+				valueOf:function(){
+					return []
+				},
+				x:printNum()
+				}
+			}
+			print()
+			// console.log(print(obj5))
+			
+			var obj99 = {
+			    birth: 1990,
+			    getAge:function() {
+			        var b = this.birth; // 1990
+							console.log(this.birth)
+			        var fn = ()=> {
+								console.log(this.birth)
+			            return new Date().getFullYear() - this.birth; // this指向window或undefined
+			        };
+			        return fn();
+			    }
+			};
+			obj99.getAge();
+			
+			function Person() {
+			  // Person() 构造函数定义 `this`作为它自己的实例.
+				
+			  this.age = 0;
+			  setInterval(() =>{
+			    // 在非严格模式, growUp()函数定义 `this`作为全局对象,
+			    // 与在 Person()构造函数中定义的 `this`并不相同.
+			    this.age++;
+					console.log(this.age)
+			  }, 1000);
+			}
+			
+			var p = new Person();
+			//
+			var obj101 = {
+			  a: 10
+			};
+			
+			Object.defineProperty(obj101, "b", {
+			  get: () =>{
+			    console.log(this.a, typeof this.a, this);
+			    return this.a+10;
+			   // 代表全局对象 'Window', 因此 'this.a' 返回 'undefined'
+			  }
+			});
+			
+			obj101.b;
+			console.log(obj101)
+			
+			let i=0
+			for(;i <5 ;i++){
+				if(i == 3){
+					break;
+				}
+			}
+			console.log(i)
 		</script>
 	</head>
 	<body>
+		<label for="to">
+			你好
+			<a href="www.baidu.com" target="_blank" id="to"></a>
+		</label>
 	</body>
 </html>

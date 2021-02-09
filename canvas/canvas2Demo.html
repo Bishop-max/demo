@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border:1px solid #00FFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="600" height="600"></canvas>
+		<script type="text/javascript">
+			//得到画布
+			var myCanvas = document.getElementById("myCanvas")
+			//得到画布上下文
+			var mtx = myCanvas.getContext("2d");
+			//设置颜色
+			mtx.fillStyle = "#00FFFF";
+			//设置信号量
+			var left = 50;
+			//设置变化量
+			var change = 50;
+			setInterval(()=>{
+				//清除画布
+				mtx.clearRect(0,0,600,600)
+				//设置变化量
+				left++;
+				change++;
+				//绘制画布
+				mtx.fillRect(left,100,change,100)
+				while(left >=600){
+					left = 0
+					change = 0
+				}
+			})
+		</script>
+	</body>
+</html>
