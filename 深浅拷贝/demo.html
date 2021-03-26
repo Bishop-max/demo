@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// var a = {
+			//   age:22,
+			//   name:'mfy',
+			//   data:{
+			//     bane:'33',
+			//     defa:'333'
+			//   }
+			// }
+			// //b对a进行浅拷贝后
+			// var b = a;
+			// console.log(a,b);
+			// a.age = 12;
+			// console.log(a,b);
+			// var a ={
+			//   age:22,
+			//   data:{
+			//     name:'3333',
+			//   }
+			// }
+			// var b = Object.assign({},a)
+			// b.data.name =3;
+			// b.age =333
+			// console.log(b)
+			// console.log(a)
+			 var a = {
+			      age: 22,
+			      data: {
+			        name: '3333',
+			      }
+			    }
+			    var c = Object.create(a)
+			    c.age = 666
+			    c.data.name = 444
+			    a.age = '18'
+			    console.log('a', a)
+			    console.log('c', c)
+		</script>
+	</body>
+</html>

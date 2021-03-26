@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.active{
+				color: #00FFFF;
+			}
+			.active1{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app"></div>
+		<template id="temp">
+			<div>
+			<span v-show="tag" :class="{active : tag}">{{msg}}</span>
+			<span v-show="!tag" :class="{active1 : !tag}">{{msgZn}}</span>
+			<button @click="changeLanuage">切换语言</button>
+			<p>当前计数:{{counter}}</p>
+			</div>
+		</template>
+		<script src="https://unpkg.com/vue@next" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			const App = {
+				template:'#temp',
+				data(){
+					return {
+						msg:"hello vue 3.0",
+						msgZn:"你好 vue3.0",
+						tag:true,
+						counter:0
+					}
+				},
+				watch:{
+					counter(oldVal,newVal){
+						if(newVal%10 === 0 ){
+							this.changeLanuage()
+							this.isActive = !this.isActive
+						}
+					}
+				},
+				mounted(){
+					setInterval(()=>{
+						this.counter++
+					},1000)
+				},
+				methods:{
+					changeLanuage(){
+						this.tag = !this.tag
+					}
+				}
+			}
+			Vue.createApp(App).mount('#app')
+		</script>
+	</body>
+</html>

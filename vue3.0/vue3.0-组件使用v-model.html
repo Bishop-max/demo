@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<cpn v-model:title="bookTitle"></cpn>
+			<p>{{bookTitle}}</p>
+		</div>
+		<template id="temp">
+			<input
+			  type="text"
+			  :value="title"
+			  @input="$emit('update:title', $event.target.value)">
+		</template>
+		<script src="https://unpkg.com/vue@next" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			const App = {
+				data(){
+					return {
+						bookTitle:"人性的枷锁"
+					}
+				},
+				methods: {
+				},
+				components: {
+					cpn: {
+						props: {
+							title: String
+						},
+						emits: ['update:title'],
+						template:`#temp`
+					}
+				}
+			}
+			const app = Vue.createApp(App)
+			app.mount('#app')
+		</script>
+	</body>
+</html>

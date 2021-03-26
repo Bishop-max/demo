@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<todo-list></todo-list>
+		</div>
+		<template id="temp">
+				<div>
+					<p>{{counter}}</p>
+					<button @click="counter ++">+</button>
+					<button @click="counter --">-</button>
+					<todo-list-son></todo-list-son>
+				</div>
+		</template>
+		<script type="text/template" id="cpn">
+			<div>
+				<p>{{todoLength.value}}</p>
+			</div>
+		</script>
+		<script src="https://unpkg.com/vue@next" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		
+			const app = Vue.createApp({})
+			
+			app.component('todo-list',{
+				data(){
+					return {
+						counter:0
+					}
+				},
+				provide(){
+					return {
+						todoLength:Vue.computed(() => this.counter)
+					}
+				},
+				template:'#temp',
+			})
+			
+			app.component('todo-list-son',{
+				data(){
+					return {
+						
+					}
+				},
+				inject:['todoLength'],
+				created:function(){
+					console.log(`${this.todoLength.value}`);
+				},
+				template:'#cpn'
+			})
+			
+			app.mount('#app')
+		</script>
+	</body>
+</html>

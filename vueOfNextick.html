@@ -7,7 +7,10 @@
 		<script type="text/javascript">
 			window.onload = function(){
 				const app = new Vue({
-					el:"#app",
+					// el:"#app",
+					template:`
+					<div>{{message}}</div>
+					`,
 					data:{
 						message:"未更新",
 					},
@@ -21,6 +24,7 @@
 						}
 					}
 				})
+			app.$mount('#app')
 			}
 		</script>
 	</head>

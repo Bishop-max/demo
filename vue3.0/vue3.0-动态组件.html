@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.demo {
+			  border: 1px solid #eee;
+			  border-radius: 2px;
+			  padding: 20px 30px;
+			}
+			
+			.tab-button {
+			  padding: 6px 10px;
+			  border-top-left-radius: 3px;
+			  border-top-right-radius: 3px;
+			  border: 1px solid #ccc;
+			  cursor: pointer;
+			  background: #f0f0f0;
+			  margin-bottom: -1px;
+			  margin-right: -1px;
+			}
+			.tab-button:hover {
+			  background: #e0e0e0;
+			}
+			.tab-button.active {
+			  background: #e0e0e0;
+			}
+			.demo-tab {
+			  border: 1px solid #ccc;
+			  padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="dynamic-component-demo" class="demo">
+			<button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]" @click="currentTab = tab">
+				{{ tab }}
+			</button>
+			<keep-alive>
+				<component :is="currentTabComponent" class="tab"></component>
+			</keep-alive>
+		</div>
+		<script src="https://unpkg.com/vue@next" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			const app = Vue.createApp({
+			  data() {
+			    return {
+			      currentTab: 'Home',
+			      tabs: ['Home', 'Posts', 'Archive']
+			    }
+			  },
+			  computed: {
+			    currentTabComponent() {
+			      return 'tab-' + this.currentTab.toLowerCase()
+			    }
+			  }
+			})
+			//home组件
+			app.component('tab-home', {
+			  template: `<div class="demo-tab">Home component</div>`
+			})
+			//posts组件
+			app.component('tab-posts', {
+			  template: `<div class="dynamic-component-demo-posts-tab">
+			    <ul class="dynamic-component-demo-posts-sidebar">
+			      <li
+			        v-for="post in posts"
+			        :key="post.id"
+			        :class="{
+			          'dynamic-component-demo-active': post === selectedPost
+			        }"
+			        @click="selectedPost = post"
+			      >
+			        {{ post.title }}
+			      </li>
+			    </ul>
+			    <div class="dynamic-component-demo-post-container">
+			      <div v-if="selectedPost" class="dynamic-component-demo-post">
+			        <h3>{{ selectedPost.title }}</h3>
+			        <div v-html="selectedPost.content"></div>
+			      </div>
+			      <strong v-else>
+			        Click on a blog title to the left to view it.
+			      </strong>
+			    </div>
+			  </div>`,
+			    data() {
+			    return {
+			      posts: [
+			        {
+			          id: 1,
+			          title: 'Cat Ipsum',
+			          content:
+			            '<p>c-cpn1</p>'
+			        },
+			        {
+			          id: 2,
+			          title: 'Hipster Ipsum',
+			          content:
+			            '<p>c-cpn2</p>'
+			        },
+			        {
+			          id: 3,
+			          title: 'Cupcake Ipsum',
+			          content:
+			            '<p>c-cpn3</p>'
+			        }
+			      ],
+			      selectedPost: null
+			    }
+			  }
+			})
+			//archive组件
+			app.component('tab-archive', {
+			  template: `<div class="demo-tab">Archive component</div>`
+			})
+			
+			app.mount('#dynamic-component-demo')
+		</script>
+	</body>
+</html>
